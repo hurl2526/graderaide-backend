@@ -40,19 +40,13 @@ const Student = function (name, course, term = 1) {
 
     getAverage: function (courseName, termIndex = (this.term - 1)) {
       for (let i = 0; i < this.courses.length; i++) {
-        if (this.courses[i].name === courseName) {
+        if (this.courses[i].name === courseName || courseName === undefined && this.courses[i].name === this.course) {
           let total = 0;
           for (let k = 0; k < this.courses[i].terms[termIndex].grades.length; k++) {
             total += this.courses[i].terms[termIndex].grades[k].score;
           }
-          return total / this.courses[i].terms[0].grades.length;
-        } else if (courseName === undefined && this.courses[i].name === this.course) {
-          let total = 0;
-          for (let k = 0; k < this.courses[i].terms[termIndex].grades.length; k++) {
-            total += this.courses[i].terms[termIndex].grades[k].score;
-          }
-          return total / this.courses[i].terms[0].grades.length;
-        }
+          return total / this.courses[i].terms[termIndex].grades.length;
+        } 
       }
     }
   };
